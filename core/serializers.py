@@ -9,3 +9,8 @@ class OrganizationSerializer(serializers.ModelSerializer):
         model = Organization
         fields = '__all__'
 
+
+class ServiceViewSet(serializers.ModelSerializer):
+    class Meta:
+        model = Service
+        fields = '__all__'
