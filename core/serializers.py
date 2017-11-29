@@ -10,7 +10,7 @@ class OrganizationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ServiceViewSet(serializers.ModelSerializer):
+class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = '__all__'
