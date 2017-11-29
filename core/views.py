@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from rest_framework import viewsets
 from .models import District, Category, Service, Organization
-from .serializers import OrganizationSerializer
+from .serializers import OrganizationSerializer, ServiceSerializer
 
 
 class OrganizationViewSet(viewsets.ModelViewSet):
