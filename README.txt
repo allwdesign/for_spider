@@ -41,3 +41,12 @@ GET /organizations/4/?category=appliances
 
 Example:http://localhost:8000/organizations/4/?category=medicaments
         http://localhost:8000/organizations/4/?category=appliances
+
+Search by organization name
+GET /organizations/1/?search=MistrerBo
+
+http://localhost:8000/organizations/1/?search=MistrerBo
+
+Search by service name
+
+http://localhost:8000/organizations/1/?search=Talenol
