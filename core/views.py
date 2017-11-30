@@ -15,13 +15,21 @@ class OrganizationList(generics.ListAPIView):
 
     def get_queryset(self):
         district = self.kwargs['district_id']
+
         queryset = Organization.objects.filter(districts=district)
 
-        # filtering by max price http://localhost:8000/organizations/5/?max_price=500.0
+        category = self.request.query_params.get('category', None)
+
+        # Filtering by max price http://localhost:8000/organizations/5/?max_price=500.0
         max_price = self.request.query_params.get('max_price', None)
 
-        # filtering by min price http://localhost:8000/organizations/1/?min_price=280.0
+        # Filtering by min price http://localhost:8000/organizations/1/?min_price=280.0
         min_price = self.request.query_params.get('min_price', None)
+
+        if category is not None:
+            # Filter by service category in this organization with set district
+            # http://localhost:8000/organizations/4/?category=appliances
+            return queryset.filter(services__category__category_name__iexact=category)
 
         if (min_price and max_price) is not None:
             # Get the price between min_price and max_price values
