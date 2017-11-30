@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url, include
-from rest_framework import routers
-from core.views import OrganizationViewSet, ServiceViewSet
+"""Specifies the URL schemes for the application core"""
+from django.conf.urls import url
+from rest_framework.urlpatterns import format_suffix_patterns
+from . import views
 
+urlpatterns = [
+    url(r'^organizations/(?P<district_id>[0-9]+)/$', views.OrganizationList.as_view(),
+        name='organization-list'),
+    url(r'^services/(?P<pk>[0-9]+)/$', views.ServiceDetail.as_view(),
+        name='service-detail'),
 
-router = routers.DefaultRouter()
-router.register(r'organizations', OrganizationViewSet)
-router.register(r'services', ServiceViewSet)
+]
 
-urlpatterns = router.urls
+urlpatterns = format_suffix_patterns(urlpatterns)
