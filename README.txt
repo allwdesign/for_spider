@@ -35,3 +35,9 @@ Filtering by min price
 GET /organizations/1/?min_price=30.0 HTTP/1.1
 
 Example: http://localhost:8000/organizations/1/?min_price=280.0
+
+Filter by service category in this organization with set district
+GET /organizations/4/?category=appliances
+
+Example:http://localhost:8000/organizations/4/?category=medicaments
+        http://localhost:8000/organizations/4/?category=appliances
