@@ -4,11 +4,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, renderers
 from rest_framework.response import Response
 from .models import District, Category, Service, Organization
-from .serializers import OrganizationSerializer, ServiceSerializer
+from .serializers import OrganizationSerializer, OrganizationDetailSerializer, ServiceSerializer
 from core import views
 
 
-class OrganizationList(generics.ListCreateAPIView):
+class OrganizationList(generics.ListAPIView):
     """Display all Organizations by district"""
     serializer_class = OrganizationSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -23,16 +23,31 @@ class OrganizationList(generics.ListCreateAPIView):
         # filtering by min price http://localhost:8000/organizations/1/?min_price=280.0
         min_price = self.request.query_params.get('min_price', None)
 
-        if max_price is not None:
+        if (min_price and max_price) is not None:
+            # Get the price between min_price and max_price values
+            queryset = queryset.filter(services__price__range=(min_price, max_price))
+
+        elif min_price is not None:
+            # Get everything that is greater or equal to this price
+            queryset = queryset.filter(services__price__gte=min_price)
+
+        elif max_price is not None:
+            # Get everything that is less or equal to this price
             queryset = queryset.filter(services__price__lte=max_price)
 
-        if min_price is not None:
-            queryset = queryset.filter(services__price__gte=min_price)
+        else:
+            return queryset
 
         return queryset
 
 
-class ServiceDetail(generics.RetrieveUpdateAPIView):
+class OrganizationDetail(generics.RetrieveAPIView):
+    """Display current Organization"""
+    queryset = Organization.objects.all()
+    serializer_class = OrganizationDetailSerializer
+
+
+class ServiceDetail(generics.RetrieveAPIView):
     """Display current service"""
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
