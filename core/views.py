@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
+from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, renderers
 from rest_framework.response import Response
@@ -11,7 +12,8 @@ from core import views
 class OrganizationList(generics.ListAPIView):
     """Display all Organizations by district"""
     serializer_class = OrganizationSerializer
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (SearchFilter, DjangoFilterBackend)
+    search_fields = ('=organization_name', '=services__service_name')
 
     def get_queryset(self):
         district = self.kwargs['district_id']
