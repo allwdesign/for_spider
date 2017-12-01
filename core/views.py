@@ -28,7 +28,7 @@ class OrganizationList(generics.ListAPIView):
         if category is not None:
             # Filter by service category in this organization with set district
             # http://localhost:8000/organizations/4/?category=appliances
-            return queryset.filter(services__category__category_name__iexact=category)
+            queryset = queryset.filter(services__category__category_name__iexact=category)
 
         if (min_price and max_price) is not None:
             # Get the price between min_price and max_price values
@@ -43,7 +43,9 @@ class OrganizationList(generics.ListAPIView):
             queryset = queryset.filter(services__price__lte=max_price)
 
         else:
-            return queryset
+            # By default return queryset filtering by district, or
+            # if set category then return queryset filtering by district and category
+            queryset = queryset
 
         return queryset
 
