@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, renderers
-from rest_framework.response import Response
-from .models import District, Category, Service, Organization
-from .serializers import OrganizationSerializer, OrganizationDetailSerializer, ServiceSerializer
-from core import views
+from rest_framework import generics
+from core.models import Service, Organization
+from core.serializers import OrganizationSerializer, OrganizationDetailSerializer, ServiceSerializer
 
 
 class OrganizationList(generics.ListAPIView):
