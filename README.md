@@ -10,7 +10,7 @@ In the admin you can use CRUD operations for organizations, services, districts,
 | ------------ | ------------ | ------------ |
 | **GET** | The list of organizations displaying by district **/organizations/district_id** | **/organizations/5**|
 | **GET** | Current organization **/organization/pk** | **/organization/1** |
-| **GET** |Current service **/services/id** | **/services/3/**|
+| **GET** |Current service **/services/pk** | **/services/3/**|
 | **GET** | Get the price between min_price and max_price values | **/organizations/1/?min_price=280.0&max_price=500.0**  |
 | **GET** | Filtering by max price | **/organizations/1/?max_price=45.0** |
 | **GET** |Filtering by min price | **/organizations/1/?min_price=30.0** |
