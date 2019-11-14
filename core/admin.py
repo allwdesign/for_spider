@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import District, Category, Service, Organization
+from core.models import District, Category, Service, Organization
 
 
 class ServiceAdmin(admin.ModelAdmin):
