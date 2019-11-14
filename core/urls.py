@@ -1,19 +1,24 @@
 # -*- coding: utf-8 -*-
 """Specifies the URL schemes for the application core"""
-from django.conf.urls import url
+from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
-from . import views
+from core.views import (
+	OrganizationList,
+	OrganizationDetail,
+	ServiceDetail,
+)
+
 
 urlpatterns = [
-    url(r'^organizations/(?P<district_id>[0-9]+)/$',
+    path('organizations/(<int:district_id>/',
         views.OrganizationList.as_view(),
         name='organization-list'),
-    url(r'^organization/(?P<pk>[0-9]+)/$',
+    path('organization/(<int:pk>/',
         views.OrganizationDetail.as_view(),
         name='organization-detail'),
-    url(r'^services/(?P<pk>[0-9]+)/$', views.ServiceDetail.as_view(),
+    path('services/<int:pk>/', views.ServiceDetail.as_view(),
         name='service-detail'),
 
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = format_suffix_patterns(urlpatterns, allowed=['json', 'html'])
