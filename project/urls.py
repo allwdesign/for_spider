@@ -8,7 +8,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls', namespace='core')),
+    path('', include('core.urls',)),
 ]
 
 # A pattern to include the login and logout views for the browsable API.
