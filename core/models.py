@@ -31,7 +31,7 @@ class Category(models.Model):
 class Service(models.Model):
     """Service model"""
     service_name = models.CharField(max_length=250)
-    category = models.ForeignKey(Category, related_name='categories')
+    category = models.ForeignKey(Category, related_name='categories', on_delete=models.CASCADE)
     price = models.DecimalField(decimal_places=2, max_digits=20)
 
     class Meta:
