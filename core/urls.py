@@ -8,6 +8,7 @@ from core.views import (
 	ServiceDetail,
 )
 
+app_name = 'core'
 
 urlpatterns = [
     path('organizations/(<int:district_id>/',
