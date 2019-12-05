@@ -3,11 +3,11 @@ from core.models import District, Category, Service, Organization
 
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('service_name', 'category', 'price')
+	list_display = ('service_name', 'category', 'price')
 
 class OrganizationAdmin(admin.ModelAdmin):
-    list_display = ('organization_name', 'description',)
-    filter_horizontal = ('districts', 'services')
+	list_display = ('organization_name', 'description',)
+	filter_horizontal = ('districts', 'services')
 
 
 admin.site.register(District)

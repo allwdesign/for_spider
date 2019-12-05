@@ -1,0 +1,43 @@
+version: '3.5'
+
+services:
+  org-db:
+    build:
+      context: ./_dockerfiles/db
+      dockerfile: Dockerfile
+    hostname: org-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5437:5432"
+    volumes:
+      - org-db:/var/lib/postgresql/data/
+
+  org-app:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8001
+    environment:
+      - DJANGO_SECRET_KEY='m*!cei(p!!mil+u0v#h)mgh2rxway2t%+8%wtizd9n^_i_9(oc'
+      - DJANGO_LOCAL=true
+      - DJANGO_DB_NAME=postgres
+      - DJANGO_DB_USER=postgres
+      - DJANGO_DB_PASSWORD=postgres
+      - DJANGO_DB_HOST=org-db
+      - DJANGO_DB_PORT=5432
+
+    depends_on:
+      - org-db
+    volumes:
+      - .:/code
+      - org-media:/media-data
+    ports:
+      - "8001:8001"
+
+
+volumes:
+  org-db:
+    name: org-db
+  org-media:
+    name: org-media

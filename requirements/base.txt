@@ -1,0 +1,6 @@
+Django==2.2
+psycopg2-binary
+djangorestframework
+django-filter
+django-rest-swagger
+django-cors-headers

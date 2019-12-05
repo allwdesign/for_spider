@@ -11,14 +11,14 @@ from core.views import (
 app_name = 'core'
 
 urlpatterns = [
-    path('organizations/(<int:district_id>/',
-        views.OrganizationList.as_view(),
-        name='organization-list'),
-    path('organization/(<int:pk>/',
-        views.OrganizationDetail.as_view(),
-        name='organization-detail'),
-    path('services/<int:pk>/', views.ServiceDetail.as_view(),
-        name='service-detail'),
+	path('organizations/(<int:district_id>/',
+		OrganizationList.as_view(),
+		name='organization-list'),
+	path('organization/(<int:pk>/',
+		OrganizationDetail.as_view(),
+		name='organization-detail'),
+	path('services/<int:pk>/', ServiceDetail.as_view(),
+		name='service-detail'),
 
 ]
 
